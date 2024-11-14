@@ -1,5 +1,7 @@
 package com.example;
 
+import java.util.Scanner;
+
 /*
  * 1. FloorSize: input two digits, witdth and dept
  * 2. StartingPosition: input two digits (width and dept) and a direction: N, E, S, W
@@ -10,7 +12,32 @@ package com.example;
  */
 
 public class Main {
+
     public static void main(String[] args) {
         System.out.println("Hello Robot!");
+        try (Scanner scan = new Scanner(System.in)) {
+            Floor floor = setup(scan);
+            Position position = setStartingPoint(scan);
+        }
+    }
+
+    private static Floor setup(Scanner scan) {
+        System.out.println("Please input the width and dept of your world:");
+        System.out.println("Width: ");
+        int width = scan.nextInt();
+        System.out.println("Dept: ");
+        int dept = scan.nextInt();
+        return new Floor(width, dept);
+    }
+
+    private static Position setStartingPoint(Scanner scan) {
+        System.out.println("Great! Now input your starting position");
+        System.out.println("x: ");
+        int x = scan.nextInt();
+        System.out.println("y: ");
+        int y = scan.nextInt();
+        System.out.println("Input the direction you are facing (N = north, S = south, E = east, W = west): ");
+        char direction = scan.next().charAt(0);
+        return new Position(x, y, direction);
     }
 }
