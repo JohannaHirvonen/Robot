@@ -18,6 +18,8 @@ public class Main {
         try (Scanner scan = new Scanner(System.in)) {
             Floor floor = setup(scan);
             Position position = setStartingPoint(scan);
+            Report report = move(scan, position);
+            System.out.println(report.toString());
         }
     }
 
@@ -39,5 +41,13 @@ public class Main {
         System.out.println("Input the direction you are facing (N = north, S = south, E = east, W = west): ");
         char direction = scan.next().charAt(0);
         return new Position(x, y, direction);
+    }
+
+    private static Report move(Scanner scan, Position position) {
+        System.out.println("Now input a string of commands for how you want to move around");
+        System.out.println("(R = turn right, L = turn left, F = move forward): ");
+        String commandString = scan.next();
+        position.move(commandString);
+        return new Report(position);
     }
 }
