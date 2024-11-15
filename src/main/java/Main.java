@@ -16,7 +16,8 @@ public class Main {
         try (Scanner scan = new Scanner(System.in)) {
             Floor floor = setup(scan);
             Position position = setStartingPoint(scan, floor);
-            Report report = move(scan, position);
+            move(scan, position);
+            Report report = new Report(position);
             System.out.println(report.toString());
         }
     }
@@ -29,20 +30,19 @@ public class Main {
     }
 
     public static Position setStartingPoint(Scanner scan, Floor floor) {
-        System.out.println("Great! Now input your starting position with two numbers");
+        System.out.println("Input your starting position with two numbers");
         int x = scan.nextInt();
         int y = scan.nextInt();
         floor.checkBoundaries(x, y);
         System.out.println("Input the direction you are facing (N = north, S = south, E = east, W = west): ");
-        char direction = scan.next().charAt(0);
-        return new Position(x, y, direction);
+        char direction = Position.checkDirection(scan.next());
+        return new Position(x, y, direction, floor);
     }
 
-    private static Report move(Scanner scan, Position position) {
+    private static void move(Scanner scan, Position position) {
         System.out.println("Now input a string of commands for how you want to move around");
         System.out.println("(R = turn right, L = turn left, F = move forward): ");
         String commandString = scan.next();
         position.move(commandString);
-        return new Report(position);
     }
 }
