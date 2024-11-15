@@ -1,5 +1,3 @@
-package com.example;
-
 import java.util.Scanner;
 
 /*
@@ -17,27 +15,24 @@ public class Main {
         System.out.println("Hello Robot!");
         try (Scanner scan = new Scanner(System.in)) {
             Floor floor = setup(scan);
-            Position position = setStartingPoint(scan);
+            Position position = setStartingPoint(scan, floor);
             Report report = move(scan, position);
             System.out.println(report.toString());
         }
     }
 
-    private static Floor setup(Scanner scan) {
-        System.out.println("Please input the width and dept of your world:");
-        System.out.println("Width: ");
+    public static Floor setup(Scanner scan) {
+        System.out.println("Please input the width and dept of your world with two numbers:");
         int width = scan.nextInt();
-        System.out.println("Dept: ");
         int dept = scan.nextInt();
         return new Floor(width, dept);
     }
 
-    private static Position setStartingPoint(Scanner scan) {
-        System.out.println("Great! Now input your starting position");
-        System.out.println("x: ");
+    public static Position setStartingPoint(Scanner scan, Floor floor) {
+        System.out.println("Great! Now input your starting position with two numbers");
         int x = scan.nextInt();
-        System.out.println("y: ");
         int y = scan.nextInt();
+        floor.checkBoundaries(x, y);
         System.out.println("Input the direction you are facing (N = north, S = south, E = east, W = west): ");
         char direction = scan.next().charAt(0);
         return new Position(x, y, direction);
