@@ -4,21 +4,14 @@ import java.util.Scanner;
 import org.junit.jupiter.api.AfterAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class MainTest {
     private static Scanner scan;
 
-    @BeforeAll
-    @SuppressWarnings("unused")
-    private static void initialize() {
-        scan = new Scanner(System.in);
-    }
-
     private void mockScannerInput(String input) {
         ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
+        scan = new Scanner(in);
     }
 
     @Test
