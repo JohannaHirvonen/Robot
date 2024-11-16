@@ -21,7 +21,7 @@ public class Floor {
 
     void checkBoundaries(int x, int y) {
         if(x < 0 || x >= width || y < 0 || y >= dept) {
-            throw new IndexOutOfBoundsException("You are outside of your room");
+            throw new IndexOutOfBoundsException("You are not on the floor (current position: " + x + " " + y + ")");
         }
     }
     
