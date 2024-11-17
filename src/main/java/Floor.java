@@ -5,7 +5,7 @@ public class Floor {
 
     public Floor(int width, int dept){
         if(width <= 0 || dept <= 0) {
-            throw new IndexOutOfBoundsException("The floor needs to have a size bigger than zero");
+            throw new IndexOutOfBoundsException("The floor needs to have a size bigger than zero.");
         }
         this.width = width;
         this.dept = dept;

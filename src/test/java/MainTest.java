@@ -1,4 +1,5 @@
 import java.io.ByteArrayInputStream;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import org.junit.jupiter.api.AfterAll;
@@ -28,8 +29,17 @@ public class MainTest {
         Exception e = assertThrows(IndexOutOfBoundsException.class, () -> {
             Main.setup(scan);
         });
-        assertEquals("The floor needs to have a size bigger than zero", e.getMessage());
+        assertEquals("The floor needs to have a size bigger than zero.", e.getMessage());
     }
+
+    @Test
+    void testSetupNonNumerals() {
+        mockScannerInput("a b");
+        Exception e = assertThrows(InputMismatchException.class, () -> {
+            Main.setup(scan);
+        });
+        assertEquals("Floor size parameters have to be numerals.", e.getMessage());
+    }    
 
     @Test
     void testSetStartingPoint() {
@@ -50,6 +60,16 @@ public class MainTest {
             Main.setStartingPoint(scan, floor);
         });
         assertEquals("You are not on the floor (current position: 10 7)", e.getMessage());
+    }
+
+    @Test
+    void testSetStartingPointNonNumerals() {
+        Floor floor = new Floor(10, 10);
+        mockScannerInput("a b N");
+        Exception e = assertThrows(InputMismatchException.class, () -> {
+            Main.setStartingPoint(scan, floor);
+        });
+        assertEquals("Starting position has to be numerals.", e.getMessage());
     }
 
     @Test
